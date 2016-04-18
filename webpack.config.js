@@ -24,6 +24,11 @@ const common = {
     module: {
         loaders: [
             {
+                test: /\.scss$/,
+                loaders: ['style', 'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]', 'sass'],
+                include: PATHS.app
+            },
+            {
                 test: /\.jsx?$/,
                 exclude: /(node_modules)/,
                 include: PATHS.app,
