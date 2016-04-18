@@ -7,7 +7,7 @@ var $             = require('gulp-load-plugins')();
 gulp.task('compile', function(){
     return gulp.src('app/**/*.{js,jsx}')
         .pipe(webpack(Object.assign({}, webpackConfig, {
-            // watch: true,
+            watch: true,
         })))
         .pipe(gulp.dest('./build/'));
 });
