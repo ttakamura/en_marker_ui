@@ -6,7 +6,7 @@ export class Main extends React.Component {
   render() {
     return (
         <div>
-          <div>{this.props.message}</div>
+          <h1>{this.props.message}</h1>
         </div>
     );
   }
