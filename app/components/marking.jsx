@@ -7,6 +7,8 @@ export class Marking extends React.Component {
         return (
             <div className={styles.originalText}>
               <textarea>{this.props.original}</textarea>
+              <hr />
+              <pre>{this.props.original}</pre>
             </div>
         );
     }
