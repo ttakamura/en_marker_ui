@@ -6,6 +6,6 @@ import ReactDOM from 'react-dom';
 import {Main}   from './components/main';
 
 ReactDOM.render(
-    React.createElement(Main),
+    <Main message="Hello Reactron" />,
     document.getElementById('app')
 );
