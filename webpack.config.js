@@ -19,7 +19,7 @@ module.exports = {
                 test: /\.jsx?$/,
                 exclude: /(node_modules)/,
                 include: PATHS.app,
-                loader: ['babel?cacheDirectory']
+                loaders: ['babel?cacheDirectory']
             }
         ]
     }
