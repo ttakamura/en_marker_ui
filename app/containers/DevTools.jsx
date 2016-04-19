@@ -8,7 +8,7 @@ const DevTools = createDevTools(
   <DockMonitor toggleVisibilityKey='ctrl-h'
                changePositionKey='ctrl-q'
                changeMonitorKey='ctrl-m'
-               defaultIsVisible={true}>
+               defaultIsVisible={false}>
     <LogMonitor theme='tomorrow' />
     <SliderMonitor keyboardEnabled />
   </DockMonitor>

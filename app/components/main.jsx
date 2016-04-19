@@ -1,14 +1,20 @@
 'use strict';
-import React     from 'react';
-import {Marking} from './marking';
-import styles    from './main.scss';
+import React            from 'react';
+import AppBar           from 'material-ui/AppBar';
+import OriginalTextArea from './original_text_area';
+import styles           from './main.scss';
 
 export class Main extends React.Component {
   render() {
     return (
       <div className={styles.mainApp}>
-        <h1>{this.props.message}</h1>
-        <Marking original={this.props.originalText} />
+        <AppBar
+           title={this.props.message}
+           />
+        <OriginalTextArea
+           original={this.props.originalText}
+           onSave={this.props.updateOriginalText}
+           />
       </div>
     );
   }
