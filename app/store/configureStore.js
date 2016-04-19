@@ -9,9 +9,9 @@ function getDebugSessionKey() {
 }
 
 const enhancer = compose(
-    // applyMiddleware(d1, d2, d3),
-    DevTools.instrument(),
-    persistState(getDebugSessionKey())
+  // applyMiddleware(d1, d2, d3),
+  DevTools.instrument(),
+  persistState(getDebugSessionKey())
 );
 
 export default function configureStore(initialState) {
@@ -20,8 +20,8 @@ export default function configureStore(initialState) {
   // Hot reload reducers (requires Webpack or Browserify HMR to be enabled)
   if (module.hot) {
     module.hot.accept('../reducers', () =>
-      store.replaceReducer(require('../reducers')/*.default if you use Babel 6+ */)
-    );
+                      store.replaceReducer(require('../reducers')/*.default if you use Babel 6+ */)
+                     );
   }
 
   return store;
