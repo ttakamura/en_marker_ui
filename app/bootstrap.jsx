@@ -1,29 +1,26 @@
 'use strict';
 import 'lodash';
 import 'babel-polyfill';
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { combineReducers } from 'redux';
-import { Provider } from 'react-redux';
+import React                         from 'react';
+import ReactDOM                      from 'react-dom';
+import { Provider }                  from 'react-redux';
 
-import Main from './containers/main';
-import appReducer from './reducers/app';
+import Main                          from './containers/main';
+import DevTools                      from './containers/DevTools';
 import {initApp, changeOriginalText} from './actions/app';
-import configureStore from './store';
+import configureStore                from './store/configureStore';
 
-const store = configureStore(appReducer);
-
-const render = (store) => {
-    ReactDOM.render(
-        <Provider store={store}>
-          <Main />
-        </Provider>,
-        document.getElementById('app')
-    );
+const initialState = {
+  message: "Hello this is en_marker_ui"
 };
+const store = configureStore(initialState);
 
-store.subscribe(() => render(store));
-
-store.dispatch(initApp("Init App"));
-
-store.dispatch(changeOriginalText("AAA BBBB CCC"));
+ReactDOM.render(
+  <Provider store={store}>
+    <div>
+      <Main />
+      <DevTools />
+    </div>
+  </Provider>,
+  document.getElementById('app')
+);
