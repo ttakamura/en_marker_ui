@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https:\/\/github.com\/ttakamura\/en_marker_ui.git"
+    "url": "git+https://github.com/ttakamura/en_marker_ui.git"
   },
   "keywords": [],
   "author": "",
@@ -37,16 +37,17 @@
     "redux-slider-monitor": "^1.0.5",
     "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.1",
-    "webpack-merge": "^0.8.4"
+    "webpack-merge": "^0.12.0"
   },
   "dependencies": {
     "css-loader": "^0.23.1",
     "immutable": "^3.8.0",
     "lodash": "^4.11.1",
+    "material-ui": "^0.15.0-beta.1",
     "node-sass": "^3.4.2",
     "node-uuid": "^1.4.7",
-    "react": "^0.14.8",
-    "react-dom": "^0.14.8",
+    "react": "^15.0.1",
+    "react-dom": "^15.0.1",
     "react-redux": "^4.4.4",
     "redux": "^3.4.0",
     "sass-loader": "^3.2.0",
