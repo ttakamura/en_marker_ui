@@ -3,7 +3,7 @@ import { Main }    from '../components/main';
 
 const MainContainer = connect(
     (state) => {
-        return {message: state.message};
+        return state;
     }
 )(Main);
 

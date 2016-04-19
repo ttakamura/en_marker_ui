@@ -4,3 +4,10 @@ export function initApp(message) {
         message: message
     };
 }
+
+export function changeOriginalText(newText) {
+    return {
+        type: 'UPDATE_ORIGINAL',
+        text: newText
+    };
+}

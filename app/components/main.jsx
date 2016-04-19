@@ -8,7 +8,7 @@ export class Main extends React.Component {
         return (
             <div className={styles.mainApp}>
               <h1>{this.props.message}</h1>
-              <Marking original={"This is a pen"} />
+              <Marking original={this.props.originalText} />
             </div>
         );
     }
