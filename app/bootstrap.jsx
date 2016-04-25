@@ -1,4 +1,3 @@
-'use strict';
 import 'lodash';
 import 'babel-polyfill';
 import React                from 'react';
@@ -16,7 +15,7 @@ import configureStore from './store/configureStore';
 injectTapEventPlugin();
 
 const initialState = {
-  message: "Hello this is en_marker_ui"
+  message: 'Hello this is en_marker_ui',
 };
 const store = configureStore(initialState);
 
@@ -31,3 +30,5 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('app')
 );
+
+store.dispatch(actions.changeOriginalText('Hello world'));
