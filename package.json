@@ -17,7 +17,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "babel-cli": "^6.7.5",
+    "babel-cli": "^6.7.7",
     "babel-core": "^6.7.4",
     "babel-loader": "^6.2.4",
     "babel-polyfill": "^6.7.4",
@@ -25,6 +25,7 @@
     "babel-preset-react": "^6.5.0",
     "babel-preset-react-hmre": "^1.1.1",
     "babel-preset-survivejs-kanban": "^0.3.3",
+    "babel-repl": "0.0.6",
     "electron-connect": "^0.3.7",
     "electron-prebuilt": "^0.36.0",
     "gulp": "^3.9.1",
@@ -41,7 +42,7 @@
   },
   "dependencies": {
     "css-loader": "^0.23.1",
-    "immutable": "^3.8.0",
+    "immutable": "^3.8.1",
     "lodash": "^4.11.1",
     "material-ui": "^0.15.0-beta.1",
     "node-sass": "^3.4.2",

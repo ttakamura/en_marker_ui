@@ -10,3 +10,11 @@ npm install
 npm run build
 npm run serve
 ```
+
+# REPL
+
+```
+babel-node repl.js
+```
+
+You should use `require("lib")` instead of the `import "lib"` statements.
