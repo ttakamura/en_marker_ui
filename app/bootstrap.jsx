@@ -7,17 +7,15 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import getMuiTheme          from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider     from 'material-ui/styles/MuiThemeProvider';
 
-import Main           from './containers/main';
-import DevTools       from './containers/DevTools';
-import * as actions   from './actions';
-import configureStore from './store/configureStore';
+import Main             from './containers/main';
+import DevTools         from './containers/DevTools';
+import * as actions     from './actions';
+import configureStore   from './store/configureStore';
+import { initialState } from './models';
 
 injectTapEventPlugin();
 
-const initialState = {
-  message: 'Hello this is en_marker_ui',
-};
-const store = configureStore(initialState);
+const store = configureStore(initialState());
 
 ReactDOM.render(
   <Provider store={store}>

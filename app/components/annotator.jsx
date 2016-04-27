@@ -1,15 +1,11 @@
 import React        from 'react';
 
 export default class Annotator extends React.Component {
-  tokens() {
-    const tokens = this.props.original.split(' ');
-    return tokens;
-  }
   render() {
     return (
-      <section>{this.tokens().map((token) => (
-        <div>
-          <span className="text">{token}</span>
+      <section>{this.props.sentence.tokens.map((token) => (
+        <div key={token.id}>
+          <span className="text">{token.word}</span>
         </div>
       ))}
       </section>

@@ -3,16 +3,15 @@ import { Main }     from '../components/main';
 import * as actions from '../actions';
 
 const MainContainer = connect(
-  (state) => {
-    return state;
-  },
-  (dispatch) => {
-    return {
-      updateOriginalText: (text) => {
-        dispatch(actions.changeOriginalText(text));
-      }
-    };
-  }
+  (state) => ({
+    message: state.get('message'),
+    currentSentence: state.get('currentSentence'),
+  }),
+  (dispatch) => ({
+    updateOriginalText: (text) => {
+      dispatch(actions.changeOriginalText(text));
+    },
+  })
 )(Main);
 
 export default MainContainer;

@@ -12,12 +12,12 @@ export class Main extends React.Component {
            title={this.props.message}
            />
         <OriginalTextArea
-           original={this.props.originalText}
+           original={this.props.currentSentence.source}
            onSave={this.props.updateOriginalText}
            />
         <hr />
         <Annotator
-           original={this.props.originalText}
+           sentence={this.props.currentSentence}
            />
       </div>
     );
