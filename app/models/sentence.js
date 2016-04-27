@@ -7,6 +7,7 @@ export class Token extends Record({ id: null, word: null, annotations: Map() }) 
     super({
       word,
       id: uuid.v1(),
+      annotations: new Map({ sj: new Annotation({ key: 'sj', name: 'subject' }) })
     });
   }
   addAnnotate(key) {
@@ -14,6 +15,18 @@ export class Token extends Record({ id: null, word: null, annotations: Map() }) 
   }
   removeAnnotate(key) {
     return this.deleteIn(['annotations', key]);
+  }
+  allAnnotations() {
+    return AnnotationMap.map((annot, key) => {
+      if (this.annotations[key] !== null) {
+        return this.annotations[key];
+      } else {
+        return annot;
+      }
+    });
+  }
+  static allAnnotations() {
+    return AnnotationMap;
   }
 }
 
