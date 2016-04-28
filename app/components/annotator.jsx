@@ -32,7 +32,8 @@ export default class Annotator extends React.Component {
             </TableRowColumn>
             {token.allAnnotations().map((annot) => (
               <TableRowColumn>
-                <Checkbox defaultChecked={annot.checked} />
+                <Checkbox defaultChecked={annot.checked}
+                          onCheck={(e, flag) => this.props.onCheck(annot, flag, token)} />
               </TableRowColumn>
             ))}
           </TableRow>

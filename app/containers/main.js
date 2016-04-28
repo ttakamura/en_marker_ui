@@ -11,6 +11,13 @@ const MainContainer = connect(
     updateOriginalText: (text) => {
       dispatch(actions.changeOriginalText(text));
     },
+    toggleAnnotation: (annot, flag, token) => {
+      if (flag) {
+        dispatch(actions.addAnnotation(annot, token));
+      } else {
+        dispatch(actions.removeAnnotation(annot, token));
+      }
+    },
   })
 )(Main);
 

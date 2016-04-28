@@ -18,6 +18,7 @@ export class Main extends React.Component {
         <hr />
         <Annotator
            sentence={this.props.currentSentence}
+           onCheck={this.props.toggleAnnotation}
            />
       </div>
     );
