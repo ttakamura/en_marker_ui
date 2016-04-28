@@ -17,8 +17,8 @@ export default class Annotator extends React.Component {
             <TableHeaderColumn>
               Word
             </TableHeaderColumn>
-            {Token.allAnnotations().map((annot, key) => (
-              <TableHeaderColumn>
+            {Token.allAnnotations().map((annot) => (
+              <TableHeaderColumn key={annot.key}>
                 {annot.key}
               </TableHeaderColumn>
             ))}
@@ -30,9 +30,9 @@ export default class Annotator extends React.Component {
             <TableRowColumn>
               {token.word}
             </TableRowColumn>
-            {token.allAnnotations().map((annot, key) => (
+            {token.allAnnotations().map((annot) => (
               <TableRowColumn>
-                <Checkbox />
+                <Checkbox defaultChecked={annot.checked} />
               </TableRowColumn>
             ))}
           </TableRow>

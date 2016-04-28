@@ -1,32 +1,34 @@
-import uuid                  from 'node-uuid';
-import { Record, Map, List } from 'immutable';
-import { AnnotationMap }     from './annotation';
+import uuid                          from 'node-uuid';
+import { Record, Map, List }         from 'immutable';
+import { AnnotationMap, Annotation } from './annotation';
 
 export class Token extends Record({ id: null, word: null, annotations: Map() }) {
   constructor({ word }) {
     super({
       word,
       id: uuid.v1(),
-      // annotations: new Map({ sj: new Annotation({ key: 'sj', name: 'subject' }) })
+      annotations: new Map({
+        sj: new Annotation({ key: 'sj', name: 'subject', checked: true }),
+      }),
     });
   }
   addAnnotate(key) {
-    return this.setIn(['annotations', key], AnnotationMap[key]);
+    return this.setIn(['annotations', key], AnnotationMap.get(key).set('checked', true));
   }
   removeAnnotate(key) {
     return this.deleteIn(['annotations', key]);
   }
   allAnnotations() {
-    return AnnotationMap.map((annot, key) => {
-      if (this.annotations[key] !== null) {
-        return this.annotations[key];
+    return AnnotationMap.toList().map((annot) => {
+      if (!!this.annotations.get(annot.key)) {
+        return this.annotations.get(annot.key);
       } else {
         return annot;
       }
     });
   }
   static allAnnotations() {
-    return AnnotationMap;
+    return AnnotationMap.toList();
   }
 }
 
