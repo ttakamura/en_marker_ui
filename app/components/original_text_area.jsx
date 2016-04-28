@@ -40,7 +40,6 @@ export default class OriginalTextArea extends React.Component {
                         }}
             />
         </div>
-        <pre>{self.props.original}</pre>
       </section>
     );
   }
