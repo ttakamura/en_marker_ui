@@ -7,9 +7,7 @@ export class Token extends Record({ id: null, word: null, annotations: Map() }) 
     super({
       word,
       id: uuid.v1(),
-      annotations: new Map({
-        sj: new Annotation({ key: 'sj', name: 'subject', checked: true }),
-      }),
+      annotations: new Map(),
     });
   }
   addAnnotate(key) {
