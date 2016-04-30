@@ -12,6 +12,7 @@ import DevTools         from './containers/DevTools';
 import * as actions     from './actions';
 import configureStore   from './store/configureStore';
 import { initialState } from './models';
+import { appendLine }   from './exporter';
 
 injectTapEventPlugin();
 
@@ -30,3 +31,7 @@ ReactDOM.render(
 );
 
 store.dispatch(actions.changeOriginalText('Hello world'));
+
+
+// TODO: remove
+window.appendLine = appendLine;

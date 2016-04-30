@@ -1,6 +1,6 @@
-import uuid                          from 'node-uuid';
-import { Record, Map, List }         from 'immutable';
-import { AnnotationMap, Annotation } from './annotation';
+import uuid                  from 'node-uuid';
+import { Record, Map, List } from 'immutable';
+import { AnnotationMap }     from './annotation';
 
 export class Token extends Record({ id: null, word: null, annotations: Map() }) {
   constructor({ word }) {
