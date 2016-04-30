@@ -41,6 +41,13 @@ export class Sentence extends Record({ id: null, source: null, tokens: List() })
       tokens: new List(tokens),
     });
   }
+  findTokenIndex(tokenId) {
+    return this.tokens.findKey((t) => t.id === tokenId);
+  }
+  updateToken(tokenId, updater) {
+    const index = this.findTokenIndex(tokenId);
+    return this.updateIn(['tokens', index], updater);
+  }
 }
 
 // s = new Sentence({source: 'hello world'})

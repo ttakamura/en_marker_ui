@@ -31,7 +31,7 @@ export default class Annotator extends React.Component {
               {token.word}
             </TableRowColumn>
             {token.allAnnotations().map((annot) => (
-              <TableRowColumn>
+              <TableRowColumn key={`${token.id}-${annot.key}`}>
                 <Checkbox defaultChecked={annot.checked}
                           onCheck={(e, flag) => this.props.onCheck(annot, flag, token)} />
               </TableRowColumn>

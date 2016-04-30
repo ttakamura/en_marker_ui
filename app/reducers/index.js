@@ -16,16 +16,18 @@ const currentSentence = (state, action) => {
     state = new Sentence({ source: '' });
   }
   switch (action.type) {
-  case 'UPDATE_ORIGINAL':
-    return new Sentence({ source: action.text });
-  case 'ADD_ANNOTATION':
-    const index = state.tokens.findKey((t) => t.id === action.token_id);
-    return state.updateIn(['tokens', index], (t) => t.addAnnotate(action.annot_key));
-  case 'REMOVE_ANNOTATION':
-    const index2 = state.tokens.findKey((t) => t.id === action.token_id);
-    return state.updateIn(['tokens', index2], (t) => t.removeAnnotate(action.annot_key));
-  default:
-    return state;
+    case 'UPDATE_ORIGINAL': {
+      return new Sentence({ source: action.text });
+    }
+    case 'ADD_ANNOTATION': {
+      return state.updateToken(action.token_id, (t) => t.addAnnotate(action.annot_key));
+    }
+    case 'REMOVE_ANNOTATION': {
+      return state.updateToken(action.token_id, (t) => t.removeAnnotate(action.annot_key));
+    }
+    default: {
+      return state;
+    }
   }
 };
 
