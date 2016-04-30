@@ -1,31 +1,50 @@
 
-let doneInit = false;
+const size     = 10 * 1024 * 1024; // 10MB
+let doneInit   = false;
+let fileSystem = null;
 
 function setup() {
   return new Promise((resolve, reject) => {
-    const size = 10 * 1024 * 1024; // 10MB
-    window.requestFileSystem = window.requestFileSystem || window.webkitRequestFileSystem;
-    // setup
-    window.webkitStorageInfo.requestQuota(window.PERSISTENT, size, (grantedSize) => {
-      window.requestFileSystem(window.PERSISTENT, grantedSize, (fs) => {
-        console.log('SETUP FS:', fs);
-        fs.root.getFile('inbox.txt', { create: true }, (dir) => {
-          console.log('OPEN FILE:', dir);
-          doneInit = true;
-          resolve({ fs, dir });
+    if (doneInit) {
+      resolve(fileSystem);
+    } else {
+      window.requestFileSystem = window.requestFileSystem || window.webkitRequestFileSystem;
+      window.webkitStorageInfo.requestQuota(window.PERSISTENT, size, (grantedSize) => {
+        window.requestFileSystem(window.PERSISTENT, grantedSize, (fs) => {
+          console.log('SETUP FS:', fs);
+          doneInit   = true;
+          fileSystem = fs;
+          resolve({ fs });
         }, reject);
       }, reject);
+    }
+  });
+}
+
+function openFile(fs, fileName) {
+  return new Promise((resolve, reject) => {
+    fs.root.getFile(fileName, { create: true }, (file) => {
+      console.log('OPEN FILE:', file);
+      resolve({ fs, file });
+    }, reject);
+  });
+}
+
+function openFileWriter(fs, file) {
+  return new Promise((resolve, reject) => {
+    file.createWriter((writer) => {
+      console.log('FILE WRITER:', writer);
+      resolve({ fs, file, writer });
     }, reject);
   });
 }
 
 export function appendLine(textLine) {
   return new Promise((resolve, reject) => {
-    if (doneInit) {
-      console.log(textLine);
-      resolve();
-    } else {
-      setup().then(resolve, reject);
-    }
+    setup()
+      .then(({ fs })       => openFile(fs, 'inbox.txt'))
+      .then(({ fs, file }) => openFileWriter(fs, file))
+      .then()
+      .catch(reject);
   });
 }
