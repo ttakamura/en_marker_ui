@@ -6,7 +6,7 @@ let fileSystem = null;
 function setup() {
   return new Promise((resolve, reject) => {
     if (doneInit) {
-      resolve(fileSystem);
+      resolve({ fs: fileSystem });
     } else {
       window.requestFileSystem = window.requestFileSystem || window.webkitRequestFileSystem;
       window.webkitStorageInfo.requestQuota(window.PERSISTENT, size, (grantedSize) => {
@@ -42,9 +42,13 @@ function openFileWriter(fs, file) {
 export function appendLine(textLine) {
   return new Promise((resolve, reject) => {
     setup()
-      .then(({ fs })       => openFile(fs, 'inbox.txt'))
-      .then(({ fs, file }) => openFileWriter(fs, file))
-      .then()
+      .then(({ fs })               => openFile(fs, 'inbox.txt'))
+      .then(({ fs, file })         => openFileWriter(fs, file))
+      .then(({ fs, file, writer }) => {
+        writer.seek(writer.length);
+        const blob = new Blob([textLine], { type: 'text/plain' });
+        writer.write(blob);
+      })
       .catch(reject);
   });
 }

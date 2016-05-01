@@ -27,3 +27,7 @@ export function removeAnnotation(annot, token) {
     token_id: token.id,
   };
 }
+
+export function exportToFile(sentence) {
+
+}

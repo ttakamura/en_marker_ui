@@ -32,6 +32,5 @@ ReactDOM.render(
 
 store.dispatch(actions.changeOriginalText('Hello world'));
 
-
 // TODO: remove
 window.appendLine = appendLine;
