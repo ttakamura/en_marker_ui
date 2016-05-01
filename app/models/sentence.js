@@ -46,6 +46,10 @@ export class Sentence extends Record({ id: null, source: null, tokens: List() })
     const index = this.findTokenIndex(tokenId);
     return this.updateIn(['tokens', index], updater);
   }
+  toAnnotatedText() {
+    const texts = this.tokens.map((t) => t.word);
+    return texts.concat(['\n\n']).join(' ');
+  }
 }
 
 // s = new Sentence({source: 'hello world'})

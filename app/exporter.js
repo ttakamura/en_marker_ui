@@ -49,6 +49,7 @@ export function appendLine(textLine) {
         const blob = new Blob([textLine], { type: 'text/plain' });
         writer.write(blob);
       })
+      .then(resolve, reject)
       .catch(reject);
   });
 }

@@ -1,3 +1,5 @@
+import { appendLine } from '../exporter';
+
 export function initApp(message) {
   return {
     type: 'INIT_APP',
@@ -29,5 +31,18 @@ export function removeAnnotation(annot, token) {
 }
 
 export function exportToFile(sentence) {
-
+  const text = sentence.toAnnotatedText();
+  return (dispatch) => {
+    appendLine(text)
+      .then(() => {
+        dispatch({
+          type: 'FINISH_EXPORT_FILE',
+        });
+      })
+      .catch(() => {
+        dispatch({
+          type: 'ERROR_EXPORT_FILE',
+        });
+      });
+  };
 }
