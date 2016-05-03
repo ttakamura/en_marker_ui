@@ -25,6 +25,13 @@ export class Token extends Record({ id: null, word: null, annotations: Map() }) 
       }
     });
   }
+  toAnnotatedText() {
+    let text = this.word;
+    this.annotations.forEach((annot, key) => {
+      text = `<${annot.key}>${text}</${annot.key}>`;
+    });
+    return text;
+  }
   static allAnnotations() {
     return AnnotationMap.toList();
   }
@@ -47,7 +54,7 @@ export class Sentence extends Record({ id: null, source: null, tokens: List() })
     return this.updateIn(['tokens', index], updater);
   }
   toAnnotatedText() {
-    const texts = this.tokens.map((t) => t.word);
+    const texts = this.tokens.map((t) => t.toAnnotatedText());
     return texts.concat(['\n\n']).join(' ');
   }
 }
