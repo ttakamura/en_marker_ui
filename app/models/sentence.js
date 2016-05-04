@@ -1,13 +1,13 @@
-import uuid                  from 'node-uuid';
-import { Record, Map, List } from 'immutable';
-import { AnnotationMap }     from './annotation';
+import uuid                          from 'node-uuid';
+import { Record, Map, List }         from 'immutable';
+import { Annotation, AnnotationMap } from './annotation';
 
 export class Token extends Record({ id: null, word: null, annotations: Map() }) {
-  constructor({ word }) {
+  constructor({ word, id, annotations }) {
     super({
       word,
-      id: uuid.v1(),
-      annotations: new Map(),
+      id: (id || uuid.v1()),
+      annotations: (annotations || new Map()),
     });
   }
   addAnnotate(key) {
@@ -35,15 +35,25 @@ export class Token extends Record({ id: null, word: null, annotations: Map() }) 
   static allAnnotations() {
     return AnnotationMap.toList();
   }
+  static fromText(text) {
+    return new List(text.split(' ').map(t => new Token({ word: t })));
+  }
+  static fromJS(token) {
+    let annotations = new Map();
+    for (var key in token.annotations) {
+      let annot = token.annotations[key];
+      annotations = annotations.set(key, new Annotation(annot));
+    }
+    return new Token({ word: token.word, id: token.id, annotations });
+  }
 }
 
 export class Sentence extends Record({ id: null, source: null, tokens: List() }) {
-  constructor({ source }) {
-    const tokens = source.split(' ').map(t => new Token({ word: t }));
+  constructor({ source, id, tokens }) {
     super({
       source,
-      id: uuid.v1(),
-      tokens: new List(tokens),
+      id: (id || uuid.v1()),
+      tokens: (tokens || Token.fromText(source)),
     });
   }
   findTokenIndex(tokenId) {
@@ -56,6 +66,13 @@ export class Sentence extends Record({ id: null, source: null, tokens: List() })
   toAnnotatedText() {
     const texts = this.tokens.map((t) => t.toAnnotatedText());
     return texts.concat(['\n\n']).join(' ');
+  }
+  static fromJS(state) {
+    let tokens = new List();
+    state.tokens.forEach((t) => {
+      tokens = tokens.push(Token.fromJS(t));
+    });
+    return new Sentence({ source: state.source, id: state.id, tokens });
   }
 }
 

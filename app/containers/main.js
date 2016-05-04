@@ -18,6 +18,9 @@ const MainContainer = connect(
         dispatch(actions.removeAnnotation(annot, token));
       }
     },
+    exportSentence: (sentence) => {
+      dispatch(actions.exportToFile(sentence));
+    },
   })
 )(Main);
 

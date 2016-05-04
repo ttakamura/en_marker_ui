@@ -29,8 +29,6 @@ ReactDOM.render(
   document.getElementById('app')
 );
 
-store.dispatch(actions.changeOriginalText('Hello world'));
-
 // TODO: remove
 window.store   = store;
 window.actions = actions;
