@@ -33,6 +33,9 @@ export function removeAnnotation(annot, token) {
 export function exportToFile(sentence) {
   const text = sentence.toAnnotatedText();
   return (dispatch) => {
+    dispatch({
+      type: 'START_EXPORT_FILE',
+    });
     appendLine(text)
       .then(() => {
         dispatch({
