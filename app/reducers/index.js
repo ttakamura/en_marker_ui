@@ -25,6 +25,9 @@ const currentSentence = (state, action) => {
     case 'REMOVE_ANNOTATION': {
       return state.updateToken(action.token_id, (t) => t.removeAnnotate(action.annot_key));
     }
+    case 'SUCCESS_EXPORT_FILE': {
+      return new Sentence({ source: '' });
+    }
     default: {
       return state;
     }
@@ -38,10 +41,24 @@ const sentences = (state = new List(), action) => {
   }
 };
 
+const showExportedMessage = (state = false, action) => {
+  switch (action.type) {
+  case 'SUCCESS_EXPORT_FILE': {
+    return true;
+  }
+  case 'CLOSE_EXPORTED_MESSAGE': {
+    return false;
+  }
+  default:
+    return state;
+  }
+};
+
 const appReducer = combineReducers({
   message: welcomeReducer,
   currentSentence,
   sentences,
+  showExportedMessage,
 });
 
 export default appReducer;

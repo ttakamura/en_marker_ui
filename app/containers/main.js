@@ -6,6 +6,7 @@ const MainContainer = connect(
   (state) => ({
     message: state.get('message'),
     currentSentence: state.get('currentSentence'),
+    showExportedMessage: state.get('showExportedMessage')
   }),
   (dispatch) => ({
     updateOriginalText: (text) => {
@@ -20,6 +21,9 @@ const MainContainer = connect(
     },
     exportSentence: (sentence) => {
       dispatch(actions.exportToFile(sentence));
+    },
+    onCloseExportedMessage: () => {
+      dispatch(actions.closeExportedMessage());
     },
   })
 )(Main);

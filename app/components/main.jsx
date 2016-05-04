@@ -20,6 +20,8 @@ export class Main extends React.Component {
            sentence={this.props.currentSentence}
            onCheck={this.props.toggleAnnotation}
            onExport={this.props.exportSentence}
+           showExportedMessage={this.props.showExportedMessage}
+           onCloseExportedMessage={this.props.onCloseExportedMessage}
            />
       </div>
     );

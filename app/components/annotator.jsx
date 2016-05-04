@@ -7,6 +7,7 @@ import TableRowColumn    from 'material-ui/Table/TableRowColumn';
 import TableBody         from 'material-ui/Table/TableBody';
 import Checkbox          from 'material-ui/Checkbox';
 import RaisedButton      from 'material-ui/RaisedButton';
+import Snackbar          from 'material-ui/Snackbar';
 import { Token }         from '../models/sentence';
 import styles            from './annotator.scss';
 
@@ -43,9 +44,16 @@ export default class Annotator extends React.Component {
           ))}
           </TableBody>
         </Table>
+
         <div className={styles.exportSection}>
           <RaisedButton label="Export" onClick={() => this.props.onExport(this.props.sentence)} />
         </div>
+
+        <Snackbar open={this.props.showExportedMessage}
+                  message="Exported the text to the file!!"
+                  autoHideDuration={4000}
+                  onRequestClose={this.props.onCloseExportedMessage}
+        />
       </div>
     );
   }

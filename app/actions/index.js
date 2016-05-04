@@ -39,7 +39,7 @@ export function exportToFile(sentence) {
     appendLine(text)
       .then(() => {
         dispatch({
-          type: 'FINISH_EXPORT_FILE',
+          type: 'SUCCESS_EXPORT_FILE',
         });
       })
       .catch(() => {
@@ -47,5 +47,11 @@ export function exportToFile(sentence) {
           type: 'ERROR_EXPORT_FILE',
         });
       });
+  };
+}
+
+export function closeExportedMessage() {
+  return {
+    type: 'CLOSE_EXPORTED_MESSAGE',
   };
 }
