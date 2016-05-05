@@ -1,6 +1,6 @@
 import uuid                          from 'node-uuid';
 import { Record, Map, List }         from 'immutable';
-import { Annotation, AnnotationMap } from './annotation';
+import { Annotation, AnnotationMap, AnnotationKeysList } from './annotation';
 
 export class Token extends Record({ id: null, word: null, annotations: Map() }) {
   constructor({ word, id, annotations }) {
@@ -17,7 +17,7 @@ export class Token extends Record({ id: null, word: null, annotations: Map() }) 
     return this.deleteIn(['annotations', key]);
   }
   allAnnotations() {
-    return AnnotationMap.toList().map((annot) => {
+    return AnnotationKeysList.map((annot) => {
       if (!!this.annotations.get(annot.key)) {
         return this.annotations.get(annot.key);
       } else {
@@ -33,7 +33,7 @@ export class Token extends Record({ id: null, word: null, annotations: Map() }) 
     return text;
   }
   static allAnnotations() {
-    return AnnotationMap.toList();
+    return AnnotationKeysList;
   }
   static fromText(text) {
     return new List(text.split(' ').map(t => new Token({ word: t })));
