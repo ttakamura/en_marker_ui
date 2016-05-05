@@ -64,8 +64,36 @@ export class Sentence extends Record({ id: null, source: null, tokens: List() })
     return this.updateIn(['tokens', index], updater);
   }
   toAnnotatedText() {
-    const texts = this.tokens.map((t) => t.toAnnotatedText());
-    return texts.concat(['\n\n']).join(' ');
+    const texts = [];
+    let currentAnnotations = [];
+    let prevAnnotations = [];
+
+    this.tokens.forEach((t) => {
+      prevAnnotations.forEach((key) => {
+        if (!t.annotations.get(key)) {
+          texts.push(`</${key}>`);
+        }
+      });
+      texts.push(' ');
+
+      currentAnnotations = [];
+      t.annotations.forEach((annot, key) => {
+        if (!prevAnnotations.find((k) => k === key)) {
+          texts.push(`<${key}>`);
+        }
+        currentAnnotations.push(key);
+      });
+
+      texts.push(t.word);
+
+      prevAnnotations = currentAnnotations;
+    });
+
+    currentAnnotations.forEach((key) => {
+      texts.push(`</${key}>`);
+    });
+
+    return texts.concat(['\n\n']).join('');
   }
   static fromJS(state) {
     let tokens = new List();
