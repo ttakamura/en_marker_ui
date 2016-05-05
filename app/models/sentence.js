@@ -76,17 +76,16 @@ export class Sentence extends Record({ id: null, source: null, tokens: List() })
       });
       texts.push(' ');
 
-      currentAnnotations = [];
       t.annotations.forEach((annot, key) => {
         if (!prevAnnotations.find((k) => k === key)) {
           texts.push(`<${key}>`);
         }
         currentAnnotations.push(key);
       });
-
       texts.push(t.word);
 
       prevAnnotations = currentAnnotations;
+      currentAnnotations = [];
     });
 
     currentAnnotations.forEach((key) => {
