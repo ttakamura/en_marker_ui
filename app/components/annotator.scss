@@ -1,4 +1,8 @@
 .table {
+  max-width: 1000px;
+  tr:hover {
+    background-color: rgb(250, 250, 250);
+  }
 }
 
 .exportSection {

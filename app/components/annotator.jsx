@@ -35,7 +35,7 @@ class AnnotatorRow extends React.Component {
     const token = this.props.token;
     return (
       <TableRow>
-        <TableRowColumn>
+        <TableRowColumn style={{ width: '80px' }}>
           {token.word}
         </TableRowColumn>
         {token.allAnnotations().map((annot) => (
@@ -51,11 +51,13 @@ class AnnotatorRow extends React.Component {
 
 class AnnotatorTable extends React.Component {
   render() {
+    // fixedHeader
+    // height={'400px'} >
     return (
       <Table className={styles.table}>
         <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
           <TableRow>
-            <TableHeaderColumn>
+            <TableHeaderColumn style={{ width: '80px' }}>
               Word
             </TableHeaderColumn>
             {Token.allAnnotations().map((annot) => (
