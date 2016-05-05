@@ -69,6 +69,7 @@ export class Sentence extends Record({ id: null, source: null, tokens: List() })
     let prevAnnotations = [];
 
     this.tokens.forEach((t) => {
+      currentAnnotations = [];
       prevAnnotations.forEach((key) => {
         if (!t.annotations.get(key)) {
           texts.push(`</${key}>`);
@@ -83,9 +84,7 @@ export class Sentence extends Record({ id: null, source: null, tokens: List() })
         currentAnnotations.push(key);
       });
       texts.push(t.word);
-
       prevAnnotations = currentAnnotations;
-      currentAnnotations = [];
     });
 
     currentAnnotations.forEach((key) => {
