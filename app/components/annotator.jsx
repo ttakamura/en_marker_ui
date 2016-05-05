@@ -11,39 +11,78 @@ import Snackbar          from 'material-ui/Snackbar';
 import { Token }         from '../models/sentence';
 import styles            from './annotator.scss';
 
+class AnnotatorColumn extends React.Component {
+  shouldComponentUpdate() {
+    return false;
+  }
+  render() {
+    const annot = this.props.annot;
+    const token = this.props.token;
+    return (
+      <TableRowColumn>
+        <Checkbox defaultChecked={annot.checked}
+                  onCheck={(e, flag) => this.props.onCheck(annot, flag, token)} />
+      </TableRowColumn>
+    );
+  }
+}
+
+class AnnotatorRow extends React.Component {
+  shouldComponentUpdate(nextProps) {
+    return this.props.token !== nextProps.token;
+  }
+  render() {
+    const token = this.props.token;
+    return (
+      <TableRow>
+        <TableRowColumn>
+          {token.word}
+        </TableRowColumn>
+        {token.allAnnotations().map((annot) => (
+          <AnnotatorColumn key={`${token.id}-${annot.key}`}
+                           token={token}
+                           annot={annot}
+                           onCheck={this.props.onCheck} />
+        ))}
+      </TableRow>
+    );
+  }
+}
+
+class AnnotatorTable extends React.Component {
+  render() {
+    return (
+      <Table className={styles.table}>
+        <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
+          <TableRow>
+            <TableHeaderColumn>
+              Word
+            </TableHeaderColumn>
+            {Token.allAnnotations().map((annot) => (
+              <TableHeaderColumn key={annot.key}>
+                {annot.key}
+              </TableHeaderColumn>
+            ))}
+          </TableRow>
+        </TableHeader>
+        <TableBody displayRowCheckbox={false}>
+          {this.props.sentence.tokens.map((token) => (
+            <AnnotatorRow key={token.id}
+                          token={token}
+                          onCheck={this.props.onCheck} />
+          ))}
+        </TableBody>
+      </Table>
+    );
+  }
+}
+
 export default class Annotator extends React.Component {
   render() {
     return (
       <div>
-        <Table className={styles.table}>
-          <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
-            <TableRow>
-              <TableHeaderColumn>
-                Word
-              </TableHeaderColumn>
-              {Token.allAnnotations().map((annot) => (
-                <TableHeaderColumn key={annot.key}>
-                  {annot.key}
-                </TableHeaderColumn>
-              ))}
-            </TableRow>
-          </TableHeader>
-          <TableBody displayRowCheckbox={false}>
-          {this.props.sentence.tokens.map((token) => (
-            <TableRow key={token.id}>
-              <TableRowColumn>
-                {token.word}
-              </TableRowColumn>
-              {token.allAnnotations().map((annot) => (
-                <TableRowColumn key={`${token.id}-${annot.key}`}>
-                  <Checkbox defaultChecked={annot.checked}
-                            onCheck={(e, flag) => this.props.onCheck(annot, flag, token)} />
-                </TableRowColumn>
-              ))}
-            </TableRow>
-          ))}
-          </TableBody>
-        </Table>
+        <AnnotatorTable sentence={this.props.sentence}
+                        onCheck={this.props.onCheck} />
 
         <div className={styles.exportSection}>
           <RaisedButton label="Export" onClick={() => this.props.onExport(this.props.sentence)} />
