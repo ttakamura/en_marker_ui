@@ -63,14 +63,23 @@ if (TARGET === 'dev-server') {
       // 0.0.0.0 is available to all network devices unlike default
       // localhost
       host: process.env.HOST,
-      port: process.env.PORT
+      port: process.env.PORT,
     },
     plugins: [
-      new webpack.HotModuleReplacementPlugin()
+      new webpack.HotModuleReplacementPlugin(),
     ],
   });
-  process.env.APP_ENV = 'development';
 } else {
-  module.exports = merge(common, {});
-  process.env.APP_ENV = 'production';
+  module.exports = merge(common, {
+    plugins: [
+      new webpack.DefinePlugin({
+        'process.env.NODE_ENV': JSON.stringify('production'),
+      }),
+      new webpack.optimize.UglifyJsPlugin({
+        compress: {
+          warnings: false,
+        },
+      }),
+    ],
+  });
 }
