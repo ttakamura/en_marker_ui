@@ -1,7 +1,8 @@
-const path    = require('path');
-const webpack = require('webpack');
-const merge   = require('webpack-merge');
-const TARGET  = process.env.npm_lifecycle_event;
+const path              = require('path');
+const webpack           = require('webpack');
+const merge             = require('webpack-merge');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const TARGET            = process.env.npm_lifecycle_event;
 
 const PATHS = {
   app: path.join(__dirname, 'app'),
@@ -67,6 +68,11 @@ if (TARGET === 'dev-server') {
     },
     plugins: [
       new webpack.HotModuleReplacementPlugin(),
+      new HtmlWebpackPlugin({
+        title: 'EnMarker',
+        filename: 'app.html',
+        template: 'index.html.ejs',
+      }),
     ],
   });
 } else {
@@ -79,6 +85,12 @@ if (TARGET === 'dev-server') {
         compress: {
           warnings: false,
         },
+      }),
+      new HtmlWebpackPlugin({
+        title: 'EnMarker',
+        filename: 'app.html',
+        template: 'index.html.ejs',
+        hash: true,
       }),
     ],
   });
