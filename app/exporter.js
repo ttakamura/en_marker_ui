@@ -1,4 +1,3 @@
-
 const size     = 10 * 1024 * 1024; // 10MB
 let doneInit   = false;
 let fileSystem = null;
