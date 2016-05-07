@@ -3,7 +3,7 @@ import { Sentence  } from './sentence';
 
 export function initialState() {
   return new Map({
-    message: 'Hello this is en_marker_ui',
+    message: 'EnMarker UI',
     currentSentence: null,
     sentences: new List(),
   });
