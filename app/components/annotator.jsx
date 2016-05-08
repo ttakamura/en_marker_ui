@@ -3,13 +3,13 @@ import RaisedButton      from 'material-ui/RaisedButton';
 import Snackbar          from 'material-ui/Snackbar';
 import styles            from './annotator.scss';
 import TableAnnotator    from './table_annotator';
+import InlineAnnotator   from './inline_annotator';
 
 export default class Annotator extends React.Component {
   render() {
     return (
       <div>
-        <TableAnnotator sentence={this.props.sentence}
-                        onCheck={this.props.onCheck} />
+        <InlineAnnotator sentence={this.props.sentence} />
 
         <div className={styles.exportSection}>
           <RaisedButton label="Export" onClick={() => this.props.onExport(this.props.sentence)} />

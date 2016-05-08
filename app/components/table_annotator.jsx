@@ -7,7 +7,7 @@ import TableRowColumn    from 'material-ui/Table/TableRowColumn';
 import TableBody         from 'material-ui/Table/TableBody';
 import Checkbox          from 'material-ui/Checkbox';
 import { Token }         from '../models/sentence';
-import styles            from './annotator.scss';
+import styles            from './table_annotator.scss';
 
 class AnnotatorColumn extends React.Component {
   shouldComponentUpdate() {
