@@ -11,5 +11,10 @@
   padding: 3px 10px;
   margin: 0px 5px;
   font-size: 1.7em;
-  background-color: rgb(240, 240, 240) !important;
+}
+
+:global {
+  .annot_sj {
+    background-color: rgb(250, 240, 240) !important;
+  }
 }

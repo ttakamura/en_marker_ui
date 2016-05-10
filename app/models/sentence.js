@@ -32,6 +32,13 @@ export class Token extends Record({ id: null, word: null, annotations: Map() }) 
     });
     return text;
   }
+  annotationKeysAsCssClass() {
+    const names = [];
+    this.annotations.forEach((annot, key) => {
+      names.push(`annot_${key}`);
+    });
+    return names.join(' ');
+  }
   static allAnnotations() {
     return AnnotationKeysList;
   }
