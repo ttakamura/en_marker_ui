@@ -39,11 +39,12 @@ export default class InlineAnnotator extends React.Component {
                   onCheck={this.props.onCheck} />
         <div className={styles.tokens}>
           {this.props.sentence.tokens.map((token) => (
-            <span className={`${styles.token} ${token.annotationKeysAsCssClass()}`}
+            <ruby className={`${styles.token} ${token.annotationKeysAsCssClass()}`}
                   key={token.id}
                   onClick={() => this.showSelector(token)}>
-              {token.word}
-            </span>
+              <rt>{token.annotationKeys().join(', ')}</rt>
+              <rb>{token.word}</rb>
+            </ruby>
           ))}
         </div>
       </Paper>

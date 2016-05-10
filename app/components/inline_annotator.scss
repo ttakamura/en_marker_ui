@@ -11,6 +11,10 @@
   padding: 3px 10px;
   margin: 0px 5px;
   font-size: 1.7em;
+
+  ruby-align: distribute-space;
+  ruby-overhang: auto;
+  ruby-position: above;
 }
 
 :global {
