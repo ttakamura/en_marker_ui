@@ -1,15 +1,19 @@
-import React             from 'react';
-import Paper             from 'material-ui/Paper';
-import { Token }         from '../models/sentence';
-import styles            from './inline_annotator.scss';
+import React              from 'react';
+import Paper              from 'material-ui/Paper';
+import { Token }          from '../models/sentence';
+import styles             from './inline_annotator.scss';
+import TableAnnotator     from './table_annotator';
+import { List }           from 'immutable';
 
 class Selector extends React.Component {
   render() {
-    const token = this.props.token;
+    const token  = this.props.token;
+    const tokens = new List([ token ]);
     if (token) {
       return (
         <div>
-          <span>Selector for '{token.word}'</span>
+          <TableAnnotator tokens={tokens}
+                          onCheck={this.props.onCheck} />
         </div>
       );
     }
@@ -31,8 +35,9 @@ export default class InlineAnnotator extends React.Component {
     console.log(this.state.selectedToken);
     return (
       <Paper className={styles.inlineAnnotator}>
-        <Selector token={this.state.selectedToken} />
-        <div>
+        <Selector token={this.state.selectedToken}
+                  onCheck={this.props.onCheck} />
+        <div className={styles.tokens}>
           {this.props.sentence.tokens.map((token) => (
             <span className={styles.token}
                   key={token.id}

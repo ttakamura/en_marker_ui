@@ -25,7 +25,7 @@ class AnnotatorColumn extends React.Component {
   }
 }
 
-class AnnotatorRow extends React.Component {
+export class AnnotatorRow extends React.Component {
   shouldComponentUpdate(nextProps) {
     return this.props.token !== nextProps.token;
   }
@@ -66,7 +66,7 @@ export default class TableAnnotator extends React.Component {
           </TableRow>
         </TableHeader>
         <TableBody displayRowCheckbox={false}>
-          {this.props.sentence.tokens.map((token) => (
+          {this.props.tokens.map((token) => (
             <AnnotatorRow key={token.id}
                           token={token}
                           onCheck={this.props.onCheck} />
