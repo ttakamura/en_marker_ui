@@ -28,11 +28,9 @@ export default class InlineAnnotator extends React.Component {
     this.state        = { selectedToken: null };
   }
   showSelector(token) {
-    console.log(token.word);
     this.setState({ selectedToken: token });
   }
   render() {
-    console.log(this.state.selectedToken);
     return (
       <Paper className={styles.inlineAnnotator}>
         <Selector token={this.state.selectedToken}
