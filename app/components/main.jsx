@@ -15,7 +15,6 @@ export class Main extends React.Component {
            original={this.props.currentSentence.source}
            onSave={this.props.updateOriginalText}
            />
-        <hr />
         <Annotator
            sentence={this.props.currentSentence}
            onCheck={this.props.toggleAnnotation}

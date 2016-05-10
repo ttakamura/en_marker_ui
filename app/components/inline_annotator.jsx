@@ -1,4 +1,5 @@
 import React             from 'react';
+import Paper             from 'material-ui/Paper';
 import { Token }         from '../models/sentence';
 import styles            from './inline_annotator.scss';
 
@@ -8,12 +9,11 @@ class Selector extends React.Component {
     if (token) {
       return (
         <div>
-          <h2>Selector for '{token.word}'</h2>
+          <span>Selector for '{token.word}'</span>
         </div>
       );
-    } else {
-      return <div />;
     }
+    return <div />;
   }
 }
 
@@ -30,7 +30,7 @@ export default class InlineAnnotator extends React.Component {
   render() {
     console.log(this.state.selectedToken);
     return (
-      <div className={styles.inlineAnnotator}>
+      <Paper className={styles.inlineAnnotator}>
         <Selector token={this.state.selectedToken} />
         <div>
           {this.props.sentence.tokens.map((token) => (
@@ -41,7 +41,7 @@ export default class InlineAnnotator extends React.Component {
             </span>
           ))}
         </div>
-      </div>
+      </Paper>
     );
   }
 }

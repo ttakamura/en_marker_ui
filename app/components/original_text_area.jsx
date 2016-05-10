@@ -1,6 +1,7 @@
 import React        from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField    from 'material-ui/TextField';
+import Paper        from 'material-ui/Paper';
 import styles       from './original_text_area.scss';
 
 export default class OriginalTextArea extends React.Component {
@@ -17,7 +18,7 @@ export default class OriginalTextArea extends React.Component {
   render() {
     const self = this;
     return (
-      <section className={styles.originalText}>
+      <Paper className={styles.originalText}>
         <div>
           <TextField className={styles.originalTextInput}
                      id="originalTextInput"
@@ -40,7 +41,7 @@ export default class OriginalTextArea extends React.Component {
                         }}
             />
         </div>
-      </section>
+      </Paper>
     );
   }
 }
