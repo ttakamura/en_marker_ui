@@ -18,6 +18,7 @@ export class Main extends React.Component {
         <Annotator
            sentence={this.props.currentSentence}
            onCheck={this.props.toggleAnnotation}
+           onCheckAll={this.props.toggleAllAnnotation}
            onExport={this.props.exportSentence}
            showExportedMessage={this.props.showExportedMessage}
            onCloseExportedMessage={this.props.onCloseExportedMessage}

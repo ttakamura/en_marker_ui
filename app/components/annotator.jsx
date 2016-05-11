@@ -10,7 +10,9 @@ export default class Annotator extends React.Component {
     return (
       <div>
         <InlineAnnotator sentence={this.props.sentence}
-                         onCheck={this.props.onCheck} />
+                         onCheck={this.props.onCheck}
+                         onCheckAll={this.props.onCheckAll}
+                         />
 
         <div className={styles.exportSection}>
           <RaisedButton label="Export" onClick={() => this.props.onExport(this.props.sentence)} />

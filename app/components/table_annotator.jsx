@@ -19,13 +19,15 @@ class AnnotatorColumn extends React.Component {
     return (
       <TableRowColumn>
         <Checkbox defaultChecked={annot.checked}
-                  onCheck={(e, flag) => this.props.onCheck(annot, flag, token)} />
+                  onCheck={(e, flag) => {
+                    this.props.onCheck(annot, flag, token);
+                  }} />
       </TableRowColumn>
     );
   }
 }
 
-export class AnnotatorRow extends React.Component {
+class AnnotatorRow extends React.Component {
   shouldComponentUpdate(nextProps) {
     return this.props.token !== nextProps.token;
   }
@@ -41,6 +43,27 @@ export class AnnotatorRow extends React.Component {
                            token={token}
                            annot={annot}
                            onCheck={this.props.onCheck} />
+        ))}
+      </TableRow>
+    );
+  }
+}
+
+class AllAnnotatorRow extends React.Component {
+  shouldComponentUpdate(nextProps) {
+    return this.props.tokens !== nextProps.tokens;
+  }
+  render() {
+    const tokens = this.props.tokens;
+    return (
+      <TableRow style={{ backgroundColor: "rgb(240, 240, 250)",  fontWeight: 'bold' }}>
+        <TableRowColumn style={{ width: '80px' }}>[ALL]</TableRowColumn>
+        {Token.allAnnotations().map((annot) => (
+          <TableRowColumn key={annot.key}>
+            <Checkbox defaultChecked={false}
+                      key={tokens.map((t) => t.id).join(",")}
+                      onCheck={(e, flag) => this.props.onCheckAll(annot, flag, tokens)} />
+          </TableRowColumn>
         ))}
       </TableRow>
     );
@@ -66,6 +89,8 @@ export default class TableAnnotator extends React.Component {
           </TableRow>
         </TableHeader>
         <TableBody displayRowCheckbox={false}>
+          <AllAnnotatorRow tokens={this.props.tokens}
+                           onCheckAll={this.props.onCheckAll} />
           {this.props.tokens.map((token) => (
             <AnnotatorRow key={token.id}
                           token={token}

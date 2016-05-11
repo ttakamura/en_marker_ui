@@ -25,6 +25,20 @@ const currentSentence = (state, action) => {
     case 'REMOVE_ANNOTATION': {
       return state.updateToken(action.token_id, (t) => t.removeAnnotate(action.annot_key));
     }
+    case 'ADD_ALL_ANNOTATION': {
+      let nextState = state;
+      action.token_ids.forEach((id) => {
+        nextState = nextState.updateToken(id, (t) => t.addAnnotate(action.annot_key));
+      });
+      return nextState;
+    }
+    case 'REMOVE_ALL_ANNOTATION': {
+      let nextState = state;
+      action.token_ids.forEach((id) => {
+        nextState = nextState.updateToken(id, (t) => t.removeAnnotate(action.annot_key));
+      });
+      return nextState;
+    }
     case 'SUCCESS_EXPORT_FILE': {
       return new Sentence({ source: '' });
     }

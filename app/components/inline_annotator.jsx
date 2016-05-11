@@ -11,7 +11,9 @@ class Selector extends React.Component {
       return (
         <div>
           <TableAnnotator tokens={this.props.tokens}
-                          onCheck={this.props.onCheck} />
+                          onCheck={this.props.onCheck}
+                          onCheckAll={this.props.onCheckAll}
+                          />
         </div>
       );
     }
@@ -52,8 +54,6 @@ export default class InlineAnnotator extends React.Component {
   render() {
     return (
       <Paper className={styles.inlineAnnotator}>
-        <Selector tokens={this.state.selectedTokens}
-                  onCheck={this.props.onCheck} />
         <div className={styles.tokens}
              onMouseUp={this.showMultiSelector}
              ref="tokensContainer" >
@@ -69,6 +69,10 @@ export default class InlineAnnotator extends React.Component {
           ))}
           <span>"</span>
         </div>
+        <Selector tokens={this.state.selectedTokens}
+                  onCheck={this.props.onCheck}
+                  onCheckAll={this.props.onCheckAll}
+                  />
       </Paper>
     );
   }

@@ -30,6 +30,22 @@ export function removeAnnotation(annot, token) {
   };
 }
 
+export function addAllAnnotation(annot, tokens) {
+  return {
+    type: 'ADD_ALL_ANNOTATION',
+    annot_key: annot.key,
+    token_ids: tokens.map((t) => t.id),
+  };
+}
+
+export function removeAllAnnotation(annot, tokens) {
+  return {
+    type: 'REMOVE_ALL_ANNOTATION',
+    annot_key: annot.key,
+    token_ids: tokens.map((t) => t.id),
+  };
+}
+
 export function exportToFile(sentence) {
   const text = sentence.toAnnotatedText();
   return (dispatch) => {

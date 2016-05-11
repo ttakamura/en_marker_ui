@@ -1,6 +1,7 @@
 import { connect }  from 'react-redux';
 import { Main }     from '../components/main';
 import * as actions from '../actions';
+import { List }        from 'immutable';
 
 const MainContainer = connect(
   (state) => ({
@@ -17,6 +18,13 @@ const MainContainer = connect(
         dispatch(actions.addAnnotation(annot, token));
       } else {
         dispatch(actions.removeAnnotation(annot, token));
+      }
+    },
+    toggleAllAnnotation: (annot, flag, tokens) => {
+      if (flag) {
+        dispatch(actions.addAllAnnotation(annot, tokens));
+      } else {
+        dispatch(actions.removeAllAnnotation(annot, tokens));
       }
     },
     exportSentence: (sentence) => {
