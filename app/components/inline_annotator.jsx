@@ -7,12 +7,10 @@ import { List }           from 'immutable';
 
 class Selector extends React.Component {
   render() {
-    const token  = this.props.token;
-    const tokens = new List([ token ]);
-    if (token) {
+    if (this.props.tokens) {
       return (
         <div>
-          <TableAnnotator tokens={tokens}
+          <TableAnnotator tokens={this.props.tokens}
                           onCheck={this.props.onCheck} />
         </div>
       );
@@ -24,22 +22,46 @@ class Selector extends React.Component {
 export default class InlineAnnotator extends React.Component {
   constructor(props) {
     super(props);
-    this.showSelector = this.showSelector.bind(this);
-    this.state        = { selectedToken: null };
+    this.showOneSelector   = this.showOneSelector.bind(this);
+    this.showMultiSelector = this.showMultiSelector.bind(this);
+    this.state = { selectedTokens: null };
   }
-  showSelector(token) {
-    this.setState({ selectedToken: token });
+  showOneSelector(token) {
+    const tokens = new List([token]);
+    this.setState({ selectedTokens: tokens });
+  }
+  showMultiSelector(e) {
+    const selection = window.getSelection();
+    if (selection.anchorNode !== selection.focusNode) {
+      e.stopPropagation();
+      const tokens = new List(this.getTokensByWindowSelection(selection));
+      this.setState({ selectedTokens: tokens });
+    }
+  }
+  getTokensByWindowSelection(selection) {
+    const selectedTokens = [];
+    Array.from(this.refs.tokensContainer.children).forEach((tokenEl) => {
+      if (selection.containsNode(tokenEl) || selection.anchorNode === tokenEl || selection.focusNode === tokenEl) {
+        const id = tokenEl.dataset.id;
+        const token = this.props.sentence.tokens.find((t) => t.id === id);
+        selectedTokens.push(token);
+      }
+    });
+    return selectedTokens;
   }
   render() {
     return (
       <Paper className={styles.inlineAnnotator}>
-        <Selector token={this.state.selectedToken}
+        <Selector tokens={this.state.selectedTokens}
                   onCheck={this.props.onCheck} />
-        <div className={styles.tokens}>
+        <div className={styles.tokens}
+             onMouseUp={this.showMultiSelector}
+             ref="tokensContainer" >
           {this.props.sentence.tokens.map((token) => (
             <ruby className={`${styles.token} ${token.annotationKeysAsCssClass()}`}
                   key={token.id}
-                  onClick={() => this.showSelector(token)}>
+                  data-id={token.id}
+                  onClick={() => this.showOneSelector(token)}>
               <rt>{token.annotationKeys().join(', ')}</rt>
               <rb>{token.word}</rb>
             </ruby>
