@@ -57,6 +57,7 @@ export default class InlineAnnotator extends React.Component {
         <div className={styles.tokens}
              onMouseUp={this.showMultiSelector}
              ref="tokensContainer" >
+          <span>"</span>
           {this.props.sentence.tokens.map((token) => (
             <ruby className={`${styles.token} ${token.annotationKeysAsCssClass()}`}
                   key={token.id}
@@ -66,6 +67,7 @@ export default class InlineAnnotator extends React.Component {
               <rb>{token.word}</rb>
             </ruby>
           ))}
+          <span>"</span>
         </div>
       </Paper>
     );
