@@ -34,7 +34,7 @@
   top: 22%;
   font-size: 1.8em;
   font-family: FontAwesome;
-  color: rgb(255, 225, 225);
+  color: rgba(255, 120, 120, 0.4);
 }
 
 :global {
@@ -60,5 +60,12 @@
     @include marking;
     content: "\f0d7";
     top: 6%;
+  }
+
+  .annot_ss {
+    background-color: rgba(120, 120, 255, 0.3) !important;
+    margin: 0px;
+    padding-right: 15px;
+    padding-left: 15px;
   }
 }
