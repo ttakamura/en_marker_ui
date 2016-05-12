@@ -56,12 +56,12 @@ class AllAnnotatorRow extends React.Component {
   render() {
     const tokens = this.props.tokens;
     return (
-      <TableRow style={{ backgroundColor: "rgb(240, 240, 250)",  fontWeight: 'bold' }}>
+      <TableRow style={{ backgroundColor: 'rgb(240, 240, 250)',  fontWeight: 'bold' }}>
         <TableRowColumn style={{ width: '80px' }}>[ALL]</TableRowColumn>
         {Token.allAnnotations().map((annot) => (
           <TableRowColumn key={annot.key}>
             <Checkbox defaultChecked={false}
-                      key={tokens.map((t) => t.id).join(",")}
+                      key={tokens.map((t) => t.id).join(',')}
                       onCheck={(e, flag) => this.props.onCheckAll(annot, flag, tokens)} />
           </TableRowColumn>
         ))}
