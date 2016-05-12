@@ -7,18 +7,58 @@
 }
 
 .token {
+  position: relative;
   display: inline-block;
   padding: 3px 10px;
   margin: 0px 5px;
   font-size: 1.7em;
-
   ruby-align: distribute-space;
   ruby-overhang: auto;
   ruby-position: above;
+
+  rt {
+    font-size: 0.3em;
+  }
+  rb {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+@mixin marking {
+  position: absolute;
+  z-index: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  top: 22%;
+  font-size: 1.8em;
+  font-family: FontAwesome;
+  color: rgb(255, 225, 225);
 }
 
 :global {
-  .annot_sj {
-    background-color: rgb(250, 240, 240) !important;
+  .annot_sj:after {
+    @include marking;
+    content: "\f111";
+  }
+  .annot_v:after {
+    @include marking;
+    content: "\f0c8";
+  }
+  .annot_not:after {
+    @include marking;
+    content: "\f068";
+    top: 50%;
+  }
+  .annot_ssj:after {
+    @include marking;
+    content: "\f0d8";
+    top: 45%;
+  }
+  .annot_fp:after, .annot_cp:after, .annot_pp:after {
+    @include marking;
+    content: "\f0d7";
+    top: 6%;
   }
 }
