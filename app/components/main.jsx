@@ -2,6 +2,7 @@ import React            from 'react';
 import AppBar           from 'material-ui/AppBar';
 import OriginalTextArea from './original_text_area';
 import Annotator        from './annotator';
+import SentenceList     from './sentence_list';
 import styles           from './main.scss';
 
 export class Main extends React.Component {
@@ -12,18 +13,20 @@ export class Main extends React.Component {
            title={this.props.message}
            />
         <OriginalTextArea
-           original={this.props.currentSentence.source}
+           original={this.props.originalText}
            onSave={this.props.updateOriginalText}
            />
-        <Annotator
-           sentence={this.props.currentSentence}
-           onCheck={this.props.toggleAnnotation}
-           onCheckAll={this.props.toggleAllAnnotation}
-           onExport={this.props.exportSentence}
-           showExportedMessage={this.props.showExportedMessage}
-           onCloseExportedMessage={this.props.onCloseExportedMessage}
-           />
+        <SentenceList />
       </div>
     );
   }
 }
+
+//        <Annotator
+//           sentence={this.props.currentSentence}
+//           onCheck={this.props.toggleAnnotation}
+//           onCheckAll={this.props.toggleAllAnnotation}
+//           onExport={this.props.exportSentence}
+//           showExportedMessage={this.props.showExportedMessage}
+//           onCloseExportedMessage={this.props.onCloseExportedMessage}
+//           />

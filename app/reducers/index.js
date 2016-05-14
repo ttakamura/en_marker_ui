@@ -68,11 +68,19 @@ const showExportedMessage = (state = false, action) => {
   }
 };
 
+const originalText = (state = '', action) => {
+  switch (action.type) {
+  default:
+    return state;
+  }
+};
+
 const appReducer = combineReducers({
   message: welcomeReducer,
   currentSentence,
   sentences,
   showExportedMessage,
+  originalText,
 });
 
 export default appReducer;

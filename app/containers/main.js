@@ -7,7 +7,9 @@ const MainContainer = connect(
   (state) => ({
     message: state.get('message'),
     currentSentence: state.get('currentSentence'),
-    showExportedMessage: state.get('showExportedMessage')
+    showExportedMessage: state.get('showExportedMessage'),
+    originalText: state.get('originalText'),
+    sentences: state.get('sentences'),
   }),
   (dispatch) => ({
     updateOriginalText: (text) => {
