@@ -11,9 +11,14 @@ export function initialState() {
 }
 
 export function stateFromJS(stateJson) {
+  let currentSentence = null;
+  if (stateJson.currentSentence && stateJson.currentSentence.word !== '') {
+    currentSentence = Sentence.fromJS(stateJson.currentSentence);
+  }
+
   return new Map({
     message: stateJson.message,
-    currentSentence: Sentence.fromJS(stateJson.currentSentence),
+    currentSentence,
     sentences: new List(stateJson.sentences.map((s) => Sentence.fromJS(s))),
     originalText: stateJson.originalText,
   });

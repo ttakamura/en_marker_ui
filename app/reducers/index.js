@@ -12,13 +12,7 @@ const welcomeReducer = (state = '', action) => {
 };
 
 const currentSentence = (state, action) => {
-  if (state === null) {
-    state = new Sentence({ source: '' });
-  }
   switch (action.type) {
-    case 'UPDATE_ORIGINAL': {
-      return new Sentence({ source: action.text });
-    }
     case 'ADD_ANNOTATION': {
       return state.updateToken(action.token_id, (t) => t.addAnnotate(action.annot_key));
     }
@@ -50,9 +44,14 @@ const currentSentence = (state, action) => {
 
 const sentences = (state = new List(), action) => {
   switch (action.type) {
-  default:
-    return state;
+  case 'UPDATE_ORIGINAL': {
+    return action.text.split('.').map((t) => (
+      new Sentence({ source: t })
+    ));
   }
+  default: {
+    return state;
+  }}
 };
 
 const showExportedMessage = (state = false, action) => {
