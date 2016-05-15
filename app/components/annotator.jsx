@@ -2,11 +2,13 @@ import React             from 'react';
 import RaisedButton      from 'material-ui/RaisedButton';
 import Snackbar          from 'material-ui/Snackbar';
 import styles            from './annotator.scss';
-import TableAnnotator    from './table_annotator';
 import InlineAnnotator   from './inline_annotator';
 
 export default class Annotator extends React.Component {
   render() {
+    if (!this.props.sentence) {
+      return (<div />);
+    }
     return (
       <div>
         <InlineAnnotator sentence={this.props.sentence}

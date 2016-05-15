@@ -16,17 +16,18 @@ export class Main extends React.Component {
            original={this.props.originalText}
            onSave={this.props.updateOriginalText}
            />
-        <SentenceList />
+        <SentenceList sentences={this.props.sentences}
+                      onClick={this.props.changeCurrentSentence}
+                      />
+        <Annotator
+           sentence={this.props.currentSentence}
+           onCheck={this.props.toggleAnnotation}
+           onCheckAll={this.props.toggleAllAnnotation}
+           onExport={this.props.exportSentence}
+           showExportedMessage={this.props.showExportedMessage}
+           onCloseExportedMessage={this.props.onCloseExportedMessage}
+           />
       </div>
     );
   }
 }
-
-//        <Annotator
-//           sentence={this.props.currentSentence}
-//           onCheck={this.props.toggleAnnotation}
-//           onCheckAll={this.props.toggleAllAnnotation}
-//           onExport={this.props.exportSentence}
-//           showExportedMessage={this.props.showExportedMessage}
-//           onCloseExportedMessage={this.props.onCloseExportedMessage}
-//           />

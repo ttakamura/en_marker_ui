@@ -35,6 +35,9 @@ const MainContainer = connect(
     onCloseExportedMessage: () => {
       dispatch(actions.closeExportedMessage());
     },
+    changeCurrentSentence: (sentence) => {
+      dispatch(actions.changeCurrentSentence(sentence));
+    }
   })
 )(Main);
 

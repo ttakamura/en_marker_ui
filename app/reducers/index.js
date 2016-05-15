@@ -13,6 +13,9 @@ const welcomeReducer = (state = '', action) => {
 
 const currentSentence = (state, action) => {
   switch (action.type) {
+    case 'CHANGE_CURRENT_SENTENCE': {
+      return action.sentence;
+    }
     case 'ADD_ANNOTATION': {
       return state.updateToken(action.token_id, (t) => t.addAnnotate(action.annot_key));
     }
@@ -46,7 +49,7 @@ const sentences = (state = new List(), action) => {
   switch (action.type) {
   case 'UPDATE_ORIGINAL': {
     return action.text.split('.').map((t) => (
-      new Sentence({ source: t })
+      new Sentence({ source: `${t} .` })
     ));
   }
   default: {

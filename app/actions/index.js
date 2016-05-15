@@ -71,3 +71,10 @@ export function closeExportedMessage() {
     type: 'CLOSE_EXPORTED_MESSAGE',
   };
 }
+
+export function changeCurrentSentence(sentence) {
+  return {
+    type: 'CHANGE_CURRENT_SENTENCE',
+    sentence: sentence
+  };
+}
