@@ -20,3 +20,11 @@ ReactDOM.render(
 // TODO: remove
 window.store   = store;
 window.actions = actions;
+
+// temp
+window.hoge = (text) => {
+  const source  = encodeURIComponent(text);
+  fetch(`http://localhost:3111/predict?source=${source}`, { mode: 'cors' })
+    .then((x) => x.json())
+    .then((x) => console.log(x));
+};
