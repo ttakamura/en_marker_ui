@@ -7,6 +7,7 @@ import Root                 from './Root';
 import * as actions         from './actions';
 import configureStore       from './store/configureStore';
 import { initialState }     from './models';
+import { predict }          from './api';
 
 injectTapEventPlugin();
 
@@ -20,11 +21,4 @@ ReactDOM.render(
 // TODO: remove
 window.store   = store;
 window.actions = actions;
-
-// temp
-window.hoge = (text) => {
-  const source  = encodeURIComponent(text);
-  fetch(`http://localhost:3111/predict?source=${source}`, { mode: 'cors' })
-    .then((x) => x.json())
-    .then((x) => console.log(x));
-};
+window.predict = predict;
