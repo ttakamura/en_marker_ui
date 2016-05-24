@@ -1,4 +1,5 @@
 import { appendLine } from '../exporter';
+import { predict    } from '../api';
 
 export function initApp(message) {
   return {
@@ -8,9 +9,17 @@ export function initApp(message) {
 }
 
 export function changeOriginalText(newText) {
-  return {
-    type: 'UPDATE_ORIGINAL',
-    text: newText,
+  return (dispatch) => {
+    dispatch({ type: 'START_UPDATE_ORIGINAL' });
+    predict(newText)
+      .then((sentences) => dispatch({
+        type: 'SUCCESS_UPDATE_ORIGINAL',
+        sentences
+      }))
+      .catch((error) => dispatch({
+        type: 'ERROR_UPDATE_ORIGINAL',
+        error
+      }));
   };
 }
 

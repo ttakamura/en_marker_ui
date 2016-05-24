@@ -47,10 +47,8 @@ const currentSentence = (state, action) => {
 
 const sentences = (state = new List(), action) => {
   switch (action.type) {
-  case 'UPDATE_ORIGINAL': {
-    return action.text.split('.').map((t) => (
-      new Sentence({ source: `${t} .` })
-    ));
+  case 'SUCCESS_UPDATE_ORIGINAL': {
+    return action.sentences;
   }
   default: {
     return state;

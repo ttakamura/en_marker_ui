@@ -23,10 +23,13 @@ export function convertToSentences(apiResult) {
 }
 
 export function predict(text) {
-  const source = encodeURIComponent(text);
-  const url    = `http://${config().api_server.host}/predict?source=${source}`;
   return new Promise((resolve, reject) => {
-    fetch(url, { mode: 'cors' })
+    const source = encodeURIComponent(text);
+    fetch(`http://${config().api_server.host}/predict`, {
+      mode: 'cors',
+      method: 'post',
+      body: new URLSearchParams(`source=${source}`)
+    })
       .then((x) => x.json())
       .then((x) => resolve(convertToSentences(x)))
       .catch(reject);
