@@ -24,7 +24,11 @@ export function convertToSentences(apiResult) {
 
 export function predict(text) {
   const source = encodeURIComponent(text);
-  fetch(`http://${config().api_server.host}/predict?source=${source}`, { mode: 'cors' })
-    .then((x) => x.json())
-    .then((x) => console.log(convertToSentences(x)));
+  const url    = `http://${config().api_server.host}/predict?source=${source}`;
+  return new Promise((resolve, reject) => {
+    fetch(url, { mode: 'cors' })
+      .then((x) => x.json())
+      .then((x) => resolve(convertToSentences(x)))
+      .catch(reject);
+  });
 }
